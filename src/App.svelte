@@ -1,5 +1,5 @@
 <script>
-import { text } from "svelte/internal";
+	import {randexp} from 'randexp'
 
 
 	let big = true
@@ -12,20 +12,20 @@ import { text } from "svelte/internal";
 	function create(){
 		rando_string = ""
 		if(big){
-			rando_string += new RandExp(`^[A-Z]{${count}}$`).gen()
+			rando_string += randexp(`^[A-Z]{${count}}$`)
 		}
 		if(lil){
-			rando_string += new RandExp(`^[a-z]{${count}}$`).gen()
+			rando_string +=  randexp(`^[a-z]{${count}}$`)
 		}
 		if(nums){
-			rando_string += new RandExp(`^[0-9]{${count}}$`).gen()
+			rando_string +=  randexp(`^[0-9]{${count}}$`)
 		}
 		if(symbols){
-			rando_string += new RandExp(`^[?=.*-+_!@#$%^&*., ?]{${count}}$`).gen()
+			rando_string +=  randexp(`^[?=.*-+_!@#$%^&*., ?]{${count}}$`)
 		}
 
 		if(!big && !lil && !nums && !symbols){
-			rando_string += new RandExp(`^[a-z]{${count}}$`).gen()
+			rando_string +=  randexp(`^[a-z]{${count}}$`)
 		}
 		rando_string = generatePassword(rando_string)
 		
@@ -33,6 +33,7 @@ import { text } from "svelte/internal";
 
 	function generatePassword(pass){
 		let shuffled = pass.split('').sort(function(){return 0.5-Math.random()}).join('');
+
 		let password = shuffled.substring(0, count)
 		return password
 	}
